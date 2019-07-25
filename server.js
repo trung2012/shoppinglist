@@ -2,13 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const config = require('config');
-
+const cors = require('cors');
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 //DB config
-const db = config.get('mongoURI');
+const db = process.env.db || config.get('mongoURI');
 
 //connect to mongo
 mongoose.connect(db, { useNewUrlParser: true, useCreateIndex: true })
